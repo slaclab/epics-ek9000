@@ -73,7 +73,7 @@ struct EL30XXStandardInputPDO_t {
 	uint8_t _r2 : 6; // Last bit in this align is Sync error for EL31XX
 	uint8_t txpdo_state : 1;
 	uint8_t txpdo_toggle : 1;
-	uint16_t value;
+	int16_t value;	// Must be signed to accommodate bipolar terminals. Unsigned representation still defines range as 0-32767, so this is safe.
 };
 #pragma pack()
 
@@ -432,7 +432,7 @@ struct EL331XInputPDO_t {
 	uint8_t error : 1;
 	uint8_t txpdo_state : 1;
 	uint8_t txpdo_toggle : 1;
-	uint16_t value;
+	int16_t value;
 };
 
 struct EL3314_0010_InputPDO_t {
@@ -444,7 +444,7 @@ struct EL3314_0010_InputPDO_t {
 	uint8_t txpdo_state : 1;
 	uint8_t txpdo_toggle : 1;
 	uint8_t padding1 : 7; // Pad it out to byte boundary
-	uint16_t value;
+	int16_t value;
 };
 #pragma pack()
 
