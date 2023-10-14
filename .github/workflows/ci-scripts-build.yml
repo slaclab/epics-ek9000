@@ -33,13 +33,10 @@ jobs:
     name: clang-format formatting check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: clang-format check
-        uses: jidicula/clang-format-action@v4.8.0
-        with:
-          clang-format-version: '14'
-          check-path: 'ek9000App'
-          exclude-regex: 'terminals.h'
+      - uses: actions/checkout@v3
+      - run: sudo apt-get update && sudo apt-get -y install clang-format-15
+      - run: CLANG_FORMAT=clang-format-15 CI=1 ./clang-format.sh
+
   
   scripts-check:
     name: Scripts Check

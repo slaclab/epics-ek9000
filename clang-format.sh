@@ -1,5 +1,9 @@
 #!/bin/bash 
 
-CLANG_FMT=$(which clang-format-14 || echo "clang-format")
+[ -z "$CLANG_FORMAT" ] && CLANG_FORMAT=clang-format
 
-$CLANG_FMT -i $(find . -iname "*.cpp" -o -iname "*.h")
+if [[ $CI -eq 1 ]]; then
+    ARGS="-Werror --dry-run"
+fi
+
+$CLANG_FORMAT $ARGS -i $(find . -iname "*.cpp" -o -iname "*.h")
